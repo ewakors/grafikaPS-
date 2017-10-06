@@ -20,11 +20,8 @@ namespace grafikaPS1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Point startPosition;
-        private Point mousePositionPoint;
-        private Rectangle newRectangle;
+ 
         public Rectangle change { get; set; }
-
         private enum SelectedShape
         { None, Line, Ellipse, Rectangle }
 
@@ -46,9 +43,8 @@ namespace grafikaPS1
             myEllipse.Fill = mySolidColorBrush;
             myEllipse.StrokeThickness = 2;
             myEllipse.Stroke = Brushes.Black;
-
-            myEllipse.Width = 200;
-            myEllipse.Height = 100;
+            myEllipse.Width = int.Parse(widthTxt.Text);
+            myEllipse.Height = int.Parse(heightTxt.Text);
 
             canvasArea.Children.Add(myEllipse);
         }
@@ -67,7 +63,7 @@ namespace grafikaPS1
             myLine.HorizontalAlignment = HorizontalAlignment.Left;
             myLine.VerticalAlignment = VerticalAlignment.Center;
 
-            myLine.StrokeThickness = 6;
+            myLine.StrokeThickness = int.Parse(ticknessTxt.Text);
             canvasArea.Children.Add(myLine);
         }
 
@@ -81,11 +77,11 @@ namespace grafikaPS1
 
             mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
             myRectangle.Fill = mySolidColorBrush;
-            myRectangle.StrokeThickness = 2;
+            myRectangle.StrokeThickness = int.Parse(ticknessTxt.Text);
             myRectangle.Stroke = Brushes.Black;
 
-            myRectangle.Width = 200;
-            myRectangle.Height = 100;
+            myRectangle.Width = int.Parse(widthTxt.Text);
+            myRectangle.Height = int.Parse(heightTxt.Text);
 
             canvasArea.Children.Add(myRectangle);
         }
@@ -97,13 +93,13 @@ namespace grafikaPS1
             switch (Shape1)
             { 
                 case SelectedShape.Line:
-                    Rendershape = new Line() { X1 = 1, X2 = 50, Y1 = 1, Y2 = 50, StrokeThickness = 3};
+                    Rendershape = new Line() { X1 = 1, X2 = 50, Y1 = 1, Y2 = 50, StrokeThickness = int.Parse(ticknessTxt.Text) };
                     Rendershape.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
                     Rendershape.HorizontalAlignment = HorizontalAlignment.Left;
                     Rendershape.VerticalAlignment = VerticalAlignment.Center;
                     break;
                 case SelectedShape.Ellipse:
-                    Rendershape = new Ellipse() { Height = 40, Width = 40 };
+                    Rendershape = new Ellipse() { Height = int.Parse(heightTxt.Text), Width = int.Parse(widthTxt.Text) };
                     RadialGradientBrush brush = new RadialGradientBrush();
                     brush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF7689"), 0.250));
                     brush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF7689"), 0.100));
@@ -111,7 +107,7 @@ namespace grafikaPS1
                     Rendershape.Fill = brush;
                     break;
                 case SelectedShape.Rectangle:
-                    Rendershape = new Rectangle() { Fill = Brushes.Blue, Height = 45, Width = 45, RadiusX = 12, RadiusY = 12 };
+                    Rendershape = new Rectangle() { Fill = Brushes.Blue, Height = int.Parse(heightTxt.Text), Width = int.Parse(widthTxt.Text) };
                     break;
                 default:
                     return;
@@ -133,6 +129,13 @@ namespace grafikaPS1
             {
                 canvasArea.Children.Remove(result.VisualHit as Shape);
             }
+        }
+
+        public void YourGotFocusEvent(object sender, RoutedEventArgs e)
+        {
+            //heightTxt.Text = string.Empty;
+            //// if you want this to happen only the first time you can remove the event handler like this
+            //heightTxt.GotFocus -= YourGotFocusEvent;
         }
     }
 }

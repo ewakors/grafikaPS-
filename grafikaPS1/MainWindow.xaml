@@ -7,19 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
 
-        <DockPanel>
-            <ToggleButton DockPanel.Dock="Top" Width="100" Height="30" Name="addLine" Content="Add line"  Click="addLine_Click" />
-            <ToggleButton DockPanel.Dock="Top" Width="100" Height="30" Name="addEllipse" Content="Add elipse" Click="addEllipse_Click"/>
-            <ToggleButton DockPanel.Dock="Top" Width="100" Height="30" Name="addRectengle" Content="Add rectengle" Click="addRectengle_Click" />
+    <Grid RenderTransformOrigin="0.499,0.596">
+        
+        <ToggleButton Height="30" Name="addLine" Content="Add line"  Click="addLine_Click" Margin="0,0,457,289" />
+        <ToggleButton Height="30" Name="addEllipse" Content="Add elipse" Click="addEllipse_Click" Margin="154,1,299,288"/>
+        <ToggleButton Height="30" Name="addRectengle" Content="Add rectengle" Click="addRectengle_Click" Margin="65,1,368,288" />
+        <TextBox Name="heightTxt" Text="Height" Foreground="Gray" GotFocus="YourGotFocusEvent" Margin="235,6,235,294"/>
+        <TextBox Name="widthTxt" Text="Width" Foreground="Gray" GotFocus="YourGotFocusEvent" Margin="303,7,167,293"/>
+        <TextBox Name="ticknessTxt" Text="Tickness" Foreground="Gray" GotFocus="YourGotFocusEvent" Margin="368,6,98,294"/>
 
         <Canvas Background="Gray" Name="canvasArea"
                 MouseLeftButtonDown="canvasArea_MouseLeftButtonDown"
-                MouseRightButtonDown="canvasArea_MouseRightButtonDown">
-            
+                MouseRightButtonDown="canvasArea_MouseRightButtonDown" Margin="0,36,0,0">
+
         </Canvas>
-        </DockPanel>
-        <!--<Button x:Name="addLine" Content="Add line" Canvas.Left="10" Canvas.Top="17" Width="101" Margin="222,0,194,287"/>-->
-        <!--<Button x:Name="addEllipse" Content="Add ellipse" Canvas.Left="164" Canvas.Top="10" Width="101"  Margin="116,0,300,287" />-->
-        <!--<Button x:Name="addRectengle" Content="Add rectengle" Canvas.Left="324" Canvas.Top="10" Width="101" Click="addRectengle_Click" Margin="10,0,406,287"/>-->
+    </Grid>
+    <!--<Button x:Name="addLine" Content="Add line" Canvas.Left="10" Canvas.Top="17" Width="101" Margin="222,0,194,287"/>-->
+    <!--<Button x:Name="addEllipse" Content="Add ellipse" Canvas.Left="164" Canvas.Top="10" Width="101"  Margin="116,0,300,287" />-->
+    <!--<Button x:Name="addRectengle" Content="Add rectengle" Canvas.Left="324" Canvas.Top="10" Width="101" Click="addRectengle_Click" Margin="10,0,406,287"/>-->
 
 </Window>
