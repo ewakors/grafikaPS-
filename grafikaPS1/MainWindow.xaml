@@ -1,0 +1,25 @@
+﻿<Window x:Class="grafikaPS1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:grafikaPS1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+
+        <DockPanel>
+            <ToggleButton DockPanel.Dock="Top" Width="100" Height="30" Name="addLine" Content="Add line"  Click="addLine_Click" />
+            <ToggleButton DockPanel.Dock="Top" Width="100" Height="30" Name="addEllipse" Content="Add elipse" Click="addEllipse_Click"/>
+            <ToggleButton DockPanel.Dock="Top" Width="100" Height="30" Name="addRectengle" Content="Add rectengle" Click="addRectengle_Click" />
+
+        <Canvas Background="Gray" Name="canvasArea"
+                MouseLeftButtonDown="canvasArea_MouseLeftButtonDown"
+                MouseRightButtonDown="canvasArea_MouseRightButtonDown">
+            
+        </Canvas>
+        </DockPanel>
+        <!--<Button x:Name="addLine" Content="Add line" Canvas.Left="10" Canvas.Top="17" Width="101" Margin="222,0,194,287"/>-->
+        <!--<Button x:Name="addEllipse" Content="Add ellipse" Canvas.Left="164" Canvas.Top="10" Width="101"  Margin="116,0,300,287" />-->
+        <!--<Button x:Name="addRectengle" Content="Add rectengle" Canvas.Left="324" Canvas.Top="10" Width="101" Click="addRectengle_Click" Margin="10,0,406,287"/>-->
+
+</Window>
