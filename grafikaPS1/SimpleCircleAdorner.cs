@@ -15,18 +15,17 @@ namespace grafikaPS1
     {
         Thumb topLeft, topRight, bottomLeft, bottomRight;
         VisualCollection visualChilderns;
+
         public SimpleCircleAdorner(UIElement adornedElement)
           : base(adornedElement)
         {
             visualChilderns = new VisualCollection(this);
 
-            //adding thumbs for drawing adorner rectangle and setting cursor
             BuildAdornerCorners(ref topLeft, Cursors.SizeNWSE);
             BuildAdornerCorners(ref topRight, Cursors.SizeNESW);
             BuildAdornerCorners(ref bottomLeft, Cursors.SizeNESW);
             BuildAdornerCorners(ref bottomRight, Cursors.SizeNWSE);
 
-            //registering drag delta events for thumb drag movement
             topLeft.DragDelta += TopLeft_DragDelta;
             topRight.DragDelta += TopRight_DragDelta;
             bottomLeft.DragDelta += BottomLeft_DragDelta;
@@ -37,7 +36,7 @@ namespace grafikaPS1
         {
             FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
             Thumb bottomRightCorner = sender as Thumb;
-            //setting new height and width after drag
+
             if (adornedElement != null && bottomRightCorner != null)
             {
                 EnforceSize(adornedElement);
@@ -57,7 +56,7 @@ namespace grafikaPS1
         {
             FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
             Thumb topRightCorner = sender as Thumb;
-            //setting new height, width and canvas top after drag
+
             if (adornedElement != null && topRightCorner != null)
             {
                 EnforceSize(adornedElement);
@@ -80,7 +79,7 @@ namespace grafikaPS1
         {
             FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
             Thumb topLeftCorner = sender as Thumb;
-            //setting new height, width and canvas top, left after drag
+
             if (adornedElement != null && topLeftCorner != null)
             {
                 EnforceSize(adornedElement);
@@ -107,7 +106,7 @@ namespace grafikaPS1
         {
             FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
             Thumb topRightCorner = sender as Thumb;
-            //setting new height, width and canvas left after drag
+
             if (adornedElement != null && topRightCorner != null)
             {
                 EnforceSize(adornedElement);
@@ -129,7 +128,6 @@ namespace grafikaPS1
 
         public void BuildAdornerCorners(ref Thumb cornerThumb, System.Windows.Input.Cursor customizedCursors)
         {
-            //adding new thumbs for adorner to visual childern collection
             if (cornerThumb != null) return;
             cornerThumb = new Thumb() { Cursor = customizedCursors, Height = 10, Width = 10, Opacity = 0.5, Background = new SolidColorBrush(Colors.Red) };
             visualChilderns.Add(cornerThumb);
@@ -142,7 +140,6 @@ namespace grafikaPS1
             if (element.Height.Equals(Double.NaN))
                 element.Height = element.DesiredSize.Height;
 
-            //enforce size of element not exceeding to it's parent element size
             FrameworkElement parent = element.Parent as FrameworkElement;
 
             if (parent != null)
@@ -162,7 +159,6 @@ namespace grafikaPS1
             double adornerWidth = this.DesiredSize.Width;
             double adornerHeight = this.DesiredSize.Height;
 
-            //arranging thumbs
             topLeft.Arrange(new Rect(-adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
             topRight.Arrange(new Rect(desireWidth - adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
             bottomLeft.Arrange(new Rect(-adornerWidth / 2, desireHeight - adornerHeight / 2, adornerWidth, adornerHeight));
@@ -176,20 +172,5 @@ namespace grafikaPS1
         {
             base.OnRender(drawingContext);
         }
-
-        //protected override void OnRender(DrawingContext drawingContext)
-        //{
-        //    Rect adornedElementRect = new Rect(this.AdornedElement.DesiredSize);
-
-        //    SolidColorBrush renderBrush = new SolidColorBrush(Colors.Green);
-        //    renderBrush.Opacity = 0.2;
-        //    Pen renderPen = new Pen(new SolidColorBrush(Colors.Navy), 1.5);
-        //    double renderRadius = 5.0;
-
-        //    drawingContext.DrawEllipse(renderBrush, renderPen, adornedElementRect.TopLeft, renderRadius, renderRadius);
-        //    drawingContext.DrawEllipse(renderBrush, renderPen, adornedElementRect.TopRight, renderRadius, renderRadius);
-        //    drawingContext.DrawEllipse(renderBrush, renderPen, adornedElementRect.BottomLeft, renderRadius, renderRadius);
-        //    drawingContext.DrawEllipse(renderBrush, renderPen, adornedElementRect.BottomRight, renderRadius, renderRadius);
-        //}
     }
 }

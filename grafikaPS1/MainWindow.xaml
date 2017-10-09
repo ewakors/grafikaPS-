@@ -5,25 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:grafikaPS1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="550" Width="525" WindowStartupLocation="CenterScreen">
 
     <Grid >
 
-        <ToggleButton Grid.Row="0" Height="30" Name="addLine" Content="Add line"  Click="addLine_Click" Margin="7,9,426,280" RenderTransformOrigin="0.496,1.001" />
-        <ToggleButton Height="30" Name="addEllipse" Content="Add elipse" Click="addEllipse_Click" Margin="211,9,222,280"/>
-        <ToggleButton Height="30" Name="addRectengle" Content="Add rectengle" Click="addRectengle_Click" Margin="108,9,325,280" />
-        <TextBox Name="heightTxt" Text="Height" Foreground="Gray" GotFocus="YourGotFocusEvent" Margin="279,41,191,259"/>
-        <TextBox Name="widthTxt" Text="Width" Foreground="Gray" GotFocus="YourGotFocusEvent" Margin="350,41,120,259"/>
-        <TextBox Name="ticknessTxt" Text="Tickness" Foreground="Gray" GotFocus="YourGotFocusEvent" Margin="368,6,98,294"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*" />
+            <RowDefinition Height="35*" />
+            <RowDefinition Height="434*" />
+        </Grid.RowDefinitions>
 
-        <Canvas Background="Ivory"  Name="canvasArea"
+        <WrapPanel Grid.Row="0" Margin="0,0,0,0">
+            <Button Height="30" Width="80" Name="addLine" Content="Add line" Click="addLine_Click" Margin="5"/>
+            <Button  Height="30" Width="80" Name="addEllipse" Content="Add elipse" Click="addEllipse_Click" Margin="5"/>
+            <Button  Height="30" Width="80" Name="addRectengle" Content="Add rectengle" Click="addRectengle_Click" Margin="5"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="1" Margin="0,0,0,0">
+            <Label>Height</Label>
+            <TextBox Height="20" Width="30" Name="heightTxt" Margin="3" />
+            <Label>Width</Label>
+            <TextBox Height="20" Width="30" Name="widthTxt" Margin="3"  />
+            <Label>Thickness</Label>
+            <TextBox Height="20" Width="30" Name="ticknessTxt" Margin="3"/>
+            <Label>X1</Label>
+            <TextBox Height="20" Width="30" Name="x1Txt" Margin="3"/>
+            <Label>Y1</Label>
+            <TextBox Height="20" Width="30" Name="y1Txt" Margin="3"/>
+            <Label>X2</Label>
+            <TextBox Height="20" Width="30" Name="x2Txt" Margin="3"  />
+            <Label>Y2</Label>
+            <TextBox Height="20" Width="30" Name="y2Txt" Margin="3"/>
+        </WrapPanel>
+
+        <Canvas Grid.Row="2" Background="Khaki"  Name="canvasArea"
                 MouseLeftButtonDown="canvasArea_MouseLeftButtonDown"
-                MouseRightButtonDown="canvasArea_MouseRightButtonDown" Margin="0,80,0,0">
-        </Canvas>
+                MouseRightButtonDown="canvasArea_MouseRightButtonDown"/>
 
     </Grid>
-    <!--<Button x:Name="addLine" Content="Add line" Canvas.Left="10" Canvas.Top="17" Width="101" Margin="222,0,194,287"/>-->
-    <!--<Button x:Name="addEllipse" Content="Add ellipse" Canvas.Left="164" Canvas.Top="10" Width="101"  Margin="116,0,300,287" />-->
-    <!--<Button x:Name="addRectengle" Content="Add rectengle" Canvas.Left="324" Canvas.Top="10" Width="101" Click="addRectengle_Click" Margin="10,0,406,287"/>-->
-
 </Window>

@@ -148,88 +148,118 @@ namespace grafikaPS1
         private void addEllipse_Click(object sender, RoutedEventArgs e)
         {
             Shape1 = SelectedShape.Ellipse;
-            Ellipse myEllipse = new Ellipse();
+            //Ellipse myEllipse = new Ellipse();
 
-            SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+            //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
 
-            mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
-            myEllipse.Fill = mySolidColorBrush;
-            myEllipse.StrokeThickness = 2;
-            myEllipse.Stroke = Brushes.Black;
-            myEllipse.Width = int.Parse(widthTxt.Text);
-            myEllipse.Height = int.Parse(heightTxt.Text);
+            //mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
+            //myEllipse.Fill = mySolidColorBrush;
+            //myEllipse.StrokeThickness = 2;
+            //myEllipse.Stroke = Brushes.Black;
+            //myEllipse.Width = int.Parse(widthTxt.Text);
+            //myEllipse.Height = int.Parse(heightTxt.Text);
 
-            canvasArea.Children.Add(myEllipse);
+            //canvasArea.Children.Add(myEllipse);
         }
 
         private void addLine_Click(object sender, RoutedEventArgs e)
         {
             Shape1 = SelectedShape.Line;
 
-            Line myLine = new Line();
+            //Line myLine = new Line();
 
-            myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            myLine.X1 = 1;
-            myLine.X2 = 50;
-            myLine.Y1 = 1;
-            myLine.Y2 = 50;
-            myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            myLine.VerticalAlignment = VerticalAlignment.Center;
+            //myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+            //myLine.X1 = 1;
+            //myLine.X2 = 50;
+            //myLine.Y1 = 1;
+            //myLine.Y2 = 50;
+            //myLine.HorizontalAlignment = HorizontalAlignment.Left;
+            //myLine.VerticalAlignment = VerticalAlignment.Center;
 
-            myLine.StrokeThickness = int.Parse(ticknessTxt.Text);
-            canvasArea.Children.Add(myLine);
+            //myLine.StrokeThickness = int.Parse(ticknessTxt.Text);
+            //canvasArea.Children.Add(myLine);
         }
 
         private void addRectengle_Click(object sender, RoutedEventArgs e)
         {
             Shape1 = SelectedShape.Rectangle;
-            Canvas canvas = new Canvas();
-            Rectangle myRectangle = new Rectangle();
+            //Canvas canvas = new Canvas();
+            //Rectangle myRectangle = new Rectangle();
 
-            SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+            //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
 
-            mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
-            myRectangle.Fill = mySolidColorBrush;
-            myRectangle.StrokeThickness = int.Parse(ticknessTxt.Text);
-            myRectangle.Stroke = Brushes.Black;
+            //mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
+            //myRectangle.Fill = mySolidColorBrush;
+            //myRectangle.StrokeThickness = int.Parse(ticknessTxt.Text);
+            //myRectangle.Stroke = Brushes.Black;
 
-            myRectangle.Width = int.Parse(widthTxt.Text);
-            myRectangle.Height = int.Parse(heightTxt.Text);
+            //myRectangle.Width = int.Parse(widthTxt.Text);
+            //myRectangle.Height = int.Parse(heightTxt.Text);
 
-            canvasArea.Children.Add(myRectangle);
+            //canvasArea.Children.Add(myRectangle);
         }
 
         private void canvasArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Shape Rendershape = null;
+            
+            {
+                switch (Shape1)
+                {
+                    case SelectedShape.Line:
+                        if ((int.Parse(x1Txt.Text) > 0) && (int.Parse(x2Txt.Text) > 0) && (int.Parse(y1Txt.Text) > 0) && (int.Parse(y2Txt.Text) > 0 ) && (int.Parse(ticknessTxt.Text) > 0 ))
+                        {
+                            Rendershape = new Line() { X1 = int.Parse(x1Txt.Text), X2 = int.Parse(x2Txt.Text), Y1 = int.Parse(y1Txt.Text), Y2 = int.Parse(x2Txt.Text), StrokeThickness = int.Parse(ticknessTxt.Text) };
+                            Rendershape.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+                            Rendershape.HorizontalAlignment = HorizontalAlignment.Left;
+                            Rendershape.VerticalAlignment = VerticalAlignment.Center;
+                            Canvas.SetLeft(Rendershape, e.GetPosition(canvasArea).X);
+                            Canvas.SetTop(Rendershape, e.GetPosition(canvasArea).Y);
+                            canvasArea.Children.Add(Rendershape);
 
-            switch (Shape1)
-            { 
-                case SelectedShape.Line:
-                    Rendershape = new Line() { X1 = 1, X2 = 50, Y1 = 1, Y2 = 50, StrokeThickness = int.Parse(ticknessTxt.Text) };
-                    Rendershape.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-                    Rendershape.HorizontalAlignment = HorizontalAlignment.Left;
-                    Rendershape.VerticalAlignment = VerticalAlignment.Center;
-                    break;
-                case SelectedShape.Ellipse:
-                    Rendershape = new Ellipse() { Height = int.Parse(heightTxt.Text), Width = int.Parse(widthTxt.Text) };
-                    RadialGradientBrush brush = new RadialGradientBrush();
-                    brush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF7689"), 0.250));
-                    brush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF7689"), 0.100));
-                    brush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF7689"), 8));
-                    Rendershape.Fill = brush;
-                    break;
-                case SelectedShape.Rectangle:
-                    Rendershape = new Rectangle() { Fill = Brushes.Blue, Height = int.Parse(heightTxt.Text), Width = int.Parse(widthTxt.Text) };
-                    break;
-                default:
-                    return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Values error");
+                        }
+                        break;
+                    case SelectedShape.Ellipse:
+                        if(int.Parse(widthTxt.Text) > 0 && int.Parse(heightTxt.Text) > 0 && (int.Parse(ticknessTxt.Text) > 0))
+                        {
+                            Rendershape = new Ellipse() { Fill = Brushes.OrangeRed, Height = int.Parse(heightTxt.Text), Width = int.Parse(widthTxt.Text) };
+                            Canvas.SetLeft(Rendershape, e.GetPosition(canvasArea).X);
+                            Canvas.SetTop(Rendershape, e.GetPosition(canvasArea).Y);
+                            canvasArea.Children.Add(Rendershape);
+
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Values error");
+                        }
+                        break;
+                    case SelectedShape.Rectangle:
+                        if (int.Parse(widthTxt.Text) > 0 && int.Parse(heightTxt.Text) > 0 && (int.Parse(ticknessTxt.Text) > 0))
+                        {
+                            Rendershape = new Rectangle() { Fill = Brushes.DarkSalmon, Height = int.Parse(heightTxt.Text), Width = int.Parse(widthTxt.Text) };
+                            Canvas.SetLeft(Rendershape, e.GetPosition(canvasArea).X);
+                            Canvas.SetTop(Rendershape, e.GetPosition(canvasArea).Y);
+                            canvasArea.Children.Add(Rendershape);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Values error");
+                        }
+                        break;
+                    default:
+                        return;
+                }
             }
+           
 
-            Canvas.SetLeft(Rendershape, e.GetPosition(canvasArea).X);
-            Canvas.SetTop(Rendershape, e.GetPosition(canvasArea).Y);
+           
 
-            canvasArea.Children.Add(Rendershape);
 
         }
 
@@ -242,13 +272,6 @@ namespace grafikaPS1
             {
                 canvasArea.Children.Remove(result.VisualHit as Shape);
             }
-        }
-
-        public void YourGotFocusEvent(object sender, RoutedEventArgs e)
-        {
-            //heightTxt.Text = string.Empty;
-            //// if you want this to happen only the first time you can remove the event handler like this
-            //heightTxt.GotFocus -= YourGotFocusEvent;
         }
     }
 }
