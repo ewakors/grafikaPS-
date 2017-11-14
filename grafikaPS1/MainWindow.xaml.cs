@@ -22,8 +22,12 @@ namespace grafikaPS1
     {
         bool isDown, isDragging, isSelected;
         UIElement selectedElement = null;
-        double originalLeft, originalTop;
+        double originalLeft, originalTop, x1, y1, skala = 1.0;
+        int stopnie;
         Point startPoint;
+        RotateTransform rotation;
+        ScaleTransform scal;
+        TransformGroup transformation;
 
         AdornerLayer adornerLayer;
 
@@ -59,6 +63,14 @@ namespace grafikaPS1
             }
         }
 
+        private void zerowanieMacierzy()
+        {
+            transformation = new TransformGroup();
+            rotation = new RotateTransform(0, x1, y1);
+            transformation.Children.Add(rotation);
+            scal = new ScaleTransform(skala, skala);
+            transformation.Children.Add(scal);
+        }
 
         private void MyCanvas_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -68,12 +80,16 @@ namespace grafikaPS1
 
         private void MyCanvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            skala = 1.0;
+            stopnie = 0;
             //removing selected element
             if (isSelected)
             {
                 isSelected = false;
+               
                 if (selectedElement != null)
                 {
+                    zerowanieMacierzy();
                     adornerLayer.Remove(adornerLayer.GetAdorners(selectedElement)[0]);
                     selectedElement = null;
                 }
@@ -148,55 +164,16 @@ namespace grafikaPS1
         private void addEllipse_Click(object sender, RoutedEventArgs e)
         {
             Shape1 = SelectedShape.Ellipse;
-            //Ellipse myEllipse = new Ellipse();
-
-            //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-
-            //mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
-            //myEllipse.Fill = mySolidColorBrush;
-            //myEllipse.StrokeThickness = 2;
-            //myEllipse.Stroke = Brushes.Black;
-            //myEllipse.Width = int.Parse(widthTxt.Text);
-            //myEllipse.Height = int.Parse(heightTxt.Text);
-
-            //canvasArea.Children.Add(myEllipse);
         }
 
         private void addLine_Click(object sender, RoutedEventArgs e)
         {
             Shape1 = SelectedShape.Line;
-
-            //Line myLine = new Line();
-
-            //myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            //myLine.X1 = 1;
-            //myLine.X2 = 50;
-            //myLine.Y1 = 1;
-            //myLine.Y2 = 50;
-            //myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            //myLine.VerticalAlignment = VerticalAlignment.Center;
-
-            //myLine.StrokeThickness = int.Parse(ticknessTxt.Text);
-            //canvasArea.Children.Add(myLine);
         }
 
         private void addRectengle_Click(object sender, RoutedEventArgs e)
         {
             Shape1 = SelectedShape.Rectangle;
-            //Canvas canvas = new Canvas();
-            //Rectangle myRectangle = new Rectangle();
-
-            //SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-
-            //mySolidColorBrush.Color = Color.FromArgb(255, 255, 255, 0);
-            //myRectangle.Fill = mySolidColorBrush;
-            //myRectangle.StrokeThickness = int.Parse(ticknessTxt.Text);
-            //myRectangle.Stroke = Brushes.Black;
-
-            //myRectangle.Width = int.Parse(widthTxt.Text);
-            //myRectangle.Height = int.Parse(heightTxt.Text);
-
-            //canvasArea.Children.Add(myRectangle);
         }
 
         private void canvasArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -256,11 +233,6 @@ namespace grafikaPS1
                         return;
                 }
             }
-           
-
-           
-
-
         }
 
         private void canvasArea_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -271,6 +243,29 @@ namespace grafikaPS1
             if (result != null)
             {
                 canvasArea.Children.Remove(result.VisualHit as Shape);
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            //-------------------------PRZESUWANIE-------------------------
+            if (shiftBox.IsChecked == true && Keyboard.IsKeyDown(Key.F2))
+                Canvas.SetTop(selectedElement, Canvas.GetTop(selectedElement) - 1);
+            if (shiftBox.IsChecked == true && Keyboard.IsKeyDown(Key.F4))
+                Canvas.SetTop(selectedElement, Canvas.GetTop(selectedElement) + 1);
+            if (shiftBox.IsChecked == true && Keyboard.IsKeyDown(Key.F1))
+                Canvas.SetLeft(selectedElement, Canvas.GetLeft(selectedElement) - 1);
+            if (shiftBox.IsChecked == true && Keyboard.IsKeyDown(Key.F3))
+                Canvas.SetLeft(selectedElement, Canvas.GetLeft(selectedElement) + 1);
+
+            //-------------------------ROTACJA-------------------------
+            if (rotationBox.IsChecked == true && Keyboard.IsKeyDown(Key.F1))
+            {
+                stopnie++;
+                rotation = new RotateTransform(stopnie, x1, y1);
+                transformation.Children.RemoveAt(0);
+                transformation.Children.Insert(0, rotation);
+                selectedElement.RenderTransform = transformation;
             }
         }
     }

@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:grafikaPS1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="722" Width="796" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
 
     <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="90*"/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="45*" />
@@ -15,12 +19,13 @@
             <RowDefinition Height="434*" />
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="0" Margin="0,0,0,0">
+        <WrapPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Button Height="30" Width="80" Name="addLine" Content="Add line" Click="addLine_Click" Margin="5"/>
             <Button  Height="30" Width="80" Name="addEllipse" Content="Add elipse" Click="addEllipse_Click" Margin="5"/>
             <Button  Height="30" Width="80" Name="addRectengle" Content="Add rectengle" Click="addRectengle_Click" Margin="5"/>
+            <CheckBox x:Name="shiftBox" Content="Shift"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="1" Margin="0,0,0,0">
+        <WrapPanel Grid.Row="1" Margin="0,0,0,10" Grid.ColumnSpan="2">
             <Label>Height</Label>
             <TextBox Height="20" Width="30" Name="heightTxt" Margin="3" />
             <Label>Width</Label>
@@ -35,11 +40,12 @@
             <TextBox Height="20" Width="30" Name="x2Txt" Margin="3"  />
             <Label>Y2</Label>
             <TextBox Height="20" Width="30" Name="y2Txt" Margin="3"/>
+            <CheckBox x:Name="rotationBox" Content="Rotation"/>
         </WrapPanel>
 
-        <Canvas Grid.Row="2" Background="Khaki"  Name="canvasArea"
+        <Canvas Grid.Row="1" Background="Khaki"  Name="canvasArea"
                 MouseLeftButtonDown="canvasArea_MouseLeftButtonDown"
-                MouseRightButtonDown="canvasArea_MouseRightButtonDown"/>
+                MouseRightButtonDown="canvasArea_MouseRightButtonDown" Grid.ColumnSpan="2" Margin="0,42,0,0" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>
