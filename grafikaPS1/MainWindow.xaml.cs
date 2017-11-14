@@ -261,10 +261,20 @@ namespace grafikaPS1
             //-------------------------ROTACJA-------------------------
             if (rotationBox.IsChecked == true && Keyboard.IsKeyDown(Key.F1))
             {
-                stopnie++;
+                stopnie = int.Parse(x1Txt.Text);
                 rotation = new RotateTransform(stopnie, x1, y1);
                 transformation.Children.RemoveAt(0);
                 transformation.Children.Insert(0, rotation);
+                selectedElement.RenderTransform = transformation;
+            }
+
+            //-------------------------SKALOWANIE-------------------------
+            if (graduationBox.IsChecked == true && Keyboard.IsKeyDown(Key.F1))
+            {
+                skala *= int.Parse(x1Txt.Text);
+                scal = new ScaleTransform(skala, skala);
+                transformation.Children.RemoveAt(1);
+                transformation.Children.Insert(1, scal);
                 selectedElement.RenderTransform = transformation;
             }
         }

@@ -41,6 +41,7 @@
             <Label>Y2</Label>
             <TextBox Height="20" Width="30" Name="y2Txt" Margin="3"/>
             <CheckBox x:Name="rotationBox" Content="Rotation"/>
+            <CheckBox x:Name="graduationBox" Content="Graduation"/>
         </WrapPanel>
 
         <Canvas Grid.Row="1" Background="Khaki"  Name="canvasArea"
